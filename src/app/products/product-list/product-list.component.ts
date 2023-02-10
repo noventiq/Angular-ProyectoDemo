@@ -1,12 +1,12 @@
 import { Product } from './../product/models/product';
-import { Component, DoCheck, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, DoCheck, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss'],
 })
-export class ProductListComponent implements OnInit, OnChanges, DoCheck {
+export class ProductListComponent implements OnInit, OnChanges, DoCheck, OnDestroy {
   products: Product[] = [];
   buscar: string = "";
 
@@ -45,9 +45,12 @@ export class ProductListComponent implements OnInit, OnChanges, DoCheck {
   }
 
   ngDoCheck(): void {
-    console.log('x04.ngDoCheck en productList.component');
+    console.log('*04.ngDoCheck en productList.component');
   }
 
+  ngOnDestroy(): void {
+    console.log('*05.ngOnDestroy en productList.component');
+  }
 
   onFullDescriptionProduct(item: Product) {
     let indexProductSelected = this.products.findIndex((x) => x.id == item.id);

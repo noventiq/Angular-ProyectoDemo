@@ -8,6 +8,7 @@ import {
   OnChanges,
   SimpleChanges,
   DoCheck,
+  OnDestroy,
 } from '@angular/core';
 
 @Component({
@@ -15,14 +16,14 @@ import {
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss'],
 })
-export class ProductComponent implements OnInit, OnChanges, DoCheck {
+export class ProductComponent implements OnInit, OnChanges, DoCheck, OnDestroy {
   products: Product[] = [];
 
   @Input() product?: Product;
   @Output() getProductEvent = new EventEmitter<Product>();
 
   constructor() {
-    console.log('x01.constructor en product.component')
+    console.log('x01.constructor en product.component');
     this.products = [
       {
         id: 1,
@@ -80,7 +81,10 @@ export class ProductComponent implements OnInit, OnChanges, DoCheck {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('x02.ngOnChanges, siempre y cuando tenga un @Input() en product.component', changes);
+    console.log(
+      'x02.ngOnChanges, siempre y cuando tenga un @Input() en product.component',
+      changes
+    );
   }
 
   ngOnInit(): void {
@@ -89,6 +93,10 @@ export class ProductComponent implements OnInit, OnChanges, DoCheck {
 
   ngDoCheck(): void {
     console.log('x04.ngDoCheck en product.component');
+  }
+
+  ngOnDestroy(): void {
+    console.log('x05.ngOnDestroy en product.component');
   }
 
   onSelectProduct(item: Product) {
