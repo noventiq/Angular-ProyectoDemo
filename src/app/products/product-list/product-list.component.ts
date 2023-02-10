@@ -1,47 +1,48 @@
+import { Subscription } from 'rxjs';
 import { Product } from '../../shared/models/product';
-import { Component, DoCheck, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  DoCheck,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
+import { PaginationProduct } from './models/paginationProduct';
+import { ProductService } from './services/productService';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss'],
 })
-export class ProductListComponent implements OnInit, OnChanges, DoCheck, OnDestroy {
-  products: Product[] = [];
-  buscar: string = "";
+export class ProductListComponent
+  implements OnInit, OnChanges, DoCheck, OnDestroy
+{
+  getProductSub: Subscription;
 
-  constructor() {
+  buscar: string = "";
+  productoPaginationInfo: PaginationProduct = {
+    products: [],
+    total: 0,
+    skip: 0,
+    limit: 0,
+  };
+
+  constructor(private _productService: ProductService) {
     console.log('*01.constructor en productList.component');
+    this.getProductList();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('*02.ngOnChanges, siempre y cuando tenga un @Input() en productList.component', changes);
+    console.log(
+      '*02.ngOnChanges, siempre y cuando tenga un @Input() en productList.component',
+      changes
+    );
   }
 
   ngOnInit() {
     console.log('*03.ngOnInit en productList.component');
-
-    this.products = [
-      {
-        id: 1,
-        title: 'iPhone 9',
-        price: 549,
-        thumbnail: 'https://i.dummyjson.com/data/products/1/thumbnail.jpg',
-      },
-      {
-        id: 2,
-        title: 'iPhone X',
-        price: 899,
-        thumbnail: 'https://i.dummyjson.com/data/products/2/thumbnail.jpg',
-      },
-      {
-        id: 3,
-        title: 'Samsung Universe 9',
-        price: 1249,
-        rating: 4.09,
-        thumbnail: 'https://i.dummyjson.com/data/products/3/thumbnail.jpg',
-      },
-    ];
   }
 
   ngDoCheck(): void {
@@ -53,7 +54,23 @@ export class ProductListComponent implements OnInit, OnChanges, DoCheck, OnDestr
   }
 
   onFullDescriptionProduct(item: Product) {
-    let indexProductSelected = this.products.findIndex((x) => x.id == item.id);
-    this.products[indexProductSelected] = item;
+    let indexProductSelected = this.productoPaginationInfo.products.findIndex((x) => x.id == item.id);
+    this.productoPaginationInfo[indexProductSelected] = item;
+  }
+
+  getProductList(): void {
+    this.getProductSub = this._productService.getProductsList().subscribe({
+      next: (response: any) => {
+        console.log(response);
+        this.productoPaginationInfo = response;
+        // this.paginationInfo = response.data;
+      },
+      error: (reason) => {
+        // Message.mostrarErrorServidor(reason);
+      },
+      complete: () => {
+        // Message.ocultarProcesando();
+      },
+    });
   }
 }

@@ -1,1 +1,11 @@
-<p>order-list works!</p>
+<h2>Ordenes</h2>
+<p>Listado de ordenes</p>
+<div class="card-container">
+  <div
+    class="card"
+    href="javascript:;"
+    *ngFor="let item of ordenesPaginationInfo.carts"
+  >
+    <span>{{ item?.id }} - Tiene {{item?.products.length}} agregados</span>
+  </div>
+</div>

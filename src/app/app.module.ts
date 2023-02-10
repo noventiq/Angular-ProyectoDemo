@@ -1,3 +1,4 @@
+import { OrdersModule } from './orders/orders.module';
 import { BlackComponent } from './layouts/black/black.component';
 import { DefaultComponent } from './layouts/default/default.component';
 import { FormsModule } from '@angular/forms';
@@ -23,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     LayoutsModule, //**layouts.module.ts
     ProductsModule,
+    OrdersModule,
     FormsModule
   ],
   providers: [],

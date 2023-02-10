@@ -53,7 +53,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getOrderList(): void {
-    this.getProductSub = this._dashboarService.getCartList().subscribe({
+    this.getOrderSub = this._dashboarService.getCartList().subscribe({
       next: (response: any) => {
         console.log(response);
         this.ordenesPaginationInfo = response;

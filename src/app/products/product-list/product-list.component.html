@@ -18,7 +18,7 @@
 </div> -->
 <div class="card-container">
   <app-product
-    *ngFor="let item of products"
+    *ngFor="let item of productoPaginationInfo.products"
     [product]="item"
     (getProductEvent)="onFullDescriptionProduct($event)"
   ></app-product>

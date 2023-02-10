@@ -1,3 +1,4 @@
+import { ProductListComponent } from './products/product-list/product-list.component';
 import { BlackComponent } from './layouts/black/black.component';
 import { DashboardComponent } from './home/dashboard/dashboard.component';
 import { OrderListComponent } from './orders/order-list/order-list.component';
@@ -17,8 +18,18 @@ const routes: Routes = [
     ],
   },
   {
+    path: 'products',
+    component: BlackComponent,
+    children: [
+      {
+        path: '',
+        component: ProductListComponent,
+      },
+    ],
+  },
+  {
     path: 'orders',
-    component: DefaultComponent,
+    component: BlackComponent,
     children: [
       {
         path: '',
