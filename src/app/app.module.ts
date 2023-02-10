@@ -8,6 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutsModule } from './layouts/layouts.module'; //*layouts.module.ts
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { LayoutsModule } from './layouts/layouts.module'; //*layouts.module.ts
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     LayoutsModule, //**layouts.module.ts
     ProductsModule,
     FormsModule

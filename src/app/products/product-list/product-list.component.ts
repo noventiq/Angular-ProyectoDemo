@@ -1,4 +1,4 @@
-import { Product } from './../product/models/product';
+import { Product } from '../../shared/models/product';
 import { Component, DoCheck, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({
