@@ -7,19 +7,19 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LayoutsModule } from './layouts/layouts.module'; //*layouts.module.ts
+// import { LayoutsModule } from './layouts/layouts.module'; //*layouts.module.ts
 
 
 @NgModule({
   declarations: [
-    // DefaultComponent,//#
-    // BlackComponent,//#
+    DefaultComponent,//#
+    BlackComponent,//#
     AppComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    LayoutsModule, //**layouts.module.ts
+    // LayoutsModule, //**layouts.module.ts
     ProductsModule,
     FormsModule
   ],
