@@ -1,6 +1,6 @@
 import { PaginationOrder } from './models/paginationOrder';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { PaginationProduct } from './models/PaginationProduct';
 import { DashboardService } from './services/DashboardService';
@@ -9,6 +9,7 @@ import { DashboardService } from './services/DashboardService';
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class DashboardComponent implements OnInit {
   getProductSub: Subscription;

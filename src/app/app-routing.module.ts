@@ -1,3 +1,4 @@
+import { ProductComponent } from './products/product/product.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { BlackComponent } from './layouts/black/black.component';
 import { DashboardComponent } from './home/dashboard/dashboard.component';
@@ -9,7 +10,7 @@ import { DefaultComponent } from './layouts/default/default.component';
 const routes: Routes = [
   {
     path: '',
-    component: BlackComponent,
+    component: DefaultComponent,
     children: [
       {
         path: '',
@@ -19,17 +20,21 @@ const routes: Routes = [
   },
   {
     path: 'products',
-    component: BlackComponent,
+    component: DefaultComponent,
     children: [
       {
         path: '',
         component: ProductListComponent,
       },
+      {
+        path: ':id',
+        component: ProductComponent,
+      },
     ],
   },
   {
     path: 'orders',
-    component: BlackComponent,
+    component: DefaultComponent,
     children: [
       {
         path: '',

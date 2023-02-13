@@ -1,7 +1,7 @@
 <h2>Productos</h2>
 <p>Listado de productos</p>
 <div>
-  <input [(ngModel)]="buscar" required>
+  <input [(ngModel)]="buscar" required />
 </div>
 <!-- <div class="card-container">
     <a class="card" target="_blank" rel="noopener" href="https://angular.io/tutorial">
@@ -17,9 +17,40 @@
     </a>
 </div> -->
 <div class="card-container">
-  <app-product
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Producto</th>
+        <th scope="col">Descripción</th>
+        <th scope="col">Categoría</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of productoPaginationInfo.products; index as i">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>
+          <img
+            :src="{{item.thumbnail}}"
+            class="me-2"
+            style="width: 20px"
+          />
+          {{ item.title }}
+        </td>
+        <td>{{ item.description }}</td>
+        <td>{{ item.category }}</td>
+        <td>{{ item.price | number }}</td>
+        <td>
+          <a routerLink="/products/{{item.id}}">Ver</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- <app-product
     *ngFor="let item of productoPaginationInfo.products"
     [product]="item"
     (getProductEvent)="onFullDescriptionProduct($event)"
-  ></app-product>
+  ></app-product> -->
 </div>
