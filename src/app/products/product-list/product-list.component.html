@@ -1,56 +1,98 @@
-<h2>Productos</h2>
-<p>Listado de productos</p>
-<div>
-  <input [(ngModel)]="buscar" required />
-</div>
-<!-- <div class="card-container">
-    <a class="card" target="_blank" rel="noopener" href="https://angular.io/tutorial">
-        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
-        <span>Learn Angular</span>
-        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-    </a>
-
-    <a class="card" target="_blank" rel="noopener" href="https://angular.io/cli">
-        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
-        <span>CLI Documentation</span>
-        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-    </a>
-</div> -->
 <div class="card-container">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Producto</th>
-        <th scope="col">Descripción</th>
-        <th scope="col">Categoría</th>
-        <th scope="col">Precio</th>
-        <th scope="col">Acción</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of productoPaginationInfo.products; index as i">
-        <th scope="row">{{ i + 1 }}</th>
-        <td>
-          <img
-            :src="{{item.thumbnail}}"
-            class="me-2"
-            style="width: 20px"
-          />
-          {{ item.title }}
-        </td>
-        <td>{{ item.description }}</td>
-        <td>{{ item.category }}</td>
-        <td>{{ item.price | number }}</td>
-        <td>
-          <a routerLink="/products/{{item.id}}">Ver</a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <!-- <app-product
-    *ngFor="let item of productoPaginationInfo.products"
-    [product]="item"
-    (getProductEvent)="onFullDescriptionProduct($event)"
-  ></app-product> -->
+  <div class="card">
+    <div class="card-header">Featured</div>
+    <div class="card-body">
+      <label>Buscar productos: </label>
+      <input [(ngModel)]="buscar" 
+      [ngClass]="claseDinamica"/>
+      <button class="btn btn-primary">Buscar</button>
+      <button class="btn btn-primary"  (click)="cambiarClase()">Cambiar clase</button>
+      <button
+        class="btn btn-sm btn-outline-primary"
+        (click)="showModalCrear(content)"
+      >
+        Crear producto
+      </button>
+      <button *ngIf="mostrarBotonEditar"
+        class="btn btn-sm btn-outline-primary"
+        data-id="1"
+        (click)="crearProducto($event)"
+      >
+        Editar producto
+      </button>
+    </div>
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Producto</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Categoría</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of productoPaginationInfo.products; index as i">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>
+              <img
+                src="{{ item.thumbnail }}"
+                class="me-2"
+                style="width: 20px"
+              />
+              {{ item.title }}
+            </td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.category }}</td>
+            <td>{{ item.price | number }}</td>
+            <td>
+              <a routerLink="/products/{{ item.id }}">Ver</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">
+        {{ modoFormulario == 1 ? "Crear" : "Editar" }} Producto
+      </h4>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      ></button>
+    </div>
+    <div class="modal-body">
+      <app-product-crud #childComponentTemplateVariable></app-product-crud>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="modal.close('Save click')"
+      >
+        Cerrar
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="crearProducto($event)"
+      >
+        Guardar 1
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="childComponentTemplateVariable.onCrearProducto()"
+      >
+        Guardar 2
+      </button>
+    </div>
+  </ng-template>
 </div>
