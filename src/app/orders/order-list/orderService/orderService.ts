@@ -17,4 +17,10 @@ export class OrderService {
       .get(this.cartListUrl)
       .pipe(map((response) => <PaginationOrder>response));
   }
+
+  getCartListLimitAndSkip(limit: number, skip: number): Observable<PaginationOrder> {
+    return this.http
+      .get(`${this.cartListUrl}?limit=${limit}&skip=${skip}`)
+      .pipe(map((response) => <PaginationOrder>response));
+  }
 }
