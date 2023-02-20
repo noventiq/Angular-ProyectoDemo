@@ -47,8 +47,10 @@ export class ProductCrudComponent {
   }
 
   onCrearProducto(): void {
-    if(this.formProduct.invalid) {
-      console.log(this.formProduct.value)
+    if (this.formProduct.invalid) {
+      // console.log(this.formProduct.value)
+      this.validateAllFormFields(this.formProduct); //{7}
+      alert('Valide los datos');
       return;
     }
     let instanceProduct = {
@@ -72,5 +74,20 @@ export class ProductCrudComponent {
         // toastr.error('algo salio mal', 'BU');
       }
     );
+  }
+
+  validateAllFormFields(formGroup: FormGroup) {
+    //{1}
+    Object.keys(formGroup.controls).forEach((field) => {
+      //{2}
+      const control = formGroup.get(field); //{3}
+      if (control instanceof FormControl) {
+        //{4}
+        control.markAsTouched({ onlySelf: true });
+      } else if (control instanceof FormGroup) {
+        //{5}
+        this.validateAllFormFields(control); //{6}
+      }
+    });
   }
 }
