@@ -18,3 +18,15 @@
 @import "login";
 @import "error";
 @import "footer";
+
+input.ng-pristine {
+    background-color:#fff;
+}
+
+input.ng-touched.ng-invalid {
+    background-color:#ffdfe9;
+}
+
+input.ng-touched.ng-valid {
+    background-color:#e4ffe4;
+}
