@@ -17,6 +17,9 @@ export class OrderListComponent {
     limit: 0,
   };
 
+  page_size: number = 10;
+  page_number: number = 1;
+
   constructor(private _orderService: OrderService) {
     this.getOrderList();
   }

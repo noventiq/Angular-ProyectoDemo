@@ -4,8 +4,16 @@
   <div
     class="card"
     href="javascript:;"
-    *ngFor="let item of ordenesPaginationInfo.carts"
+    *ngFor="
+      let item of ordenesPaginationInfo.carts
+        | paginate : page_size : page_number
+    "
   >
-    <span>{{ item?.id }} - Tiene {{item?.products.length}} agregados</span>
+    <span>{{ item?.id }} - Tiene {{ item?.products.length }} agregados</span>
   </div>
+  <ngb-pagination
+    [(page)]="page_number"
+    [pageSize]="page_size"
+    [collectionSize]="ordenesPaginationInfo.carts.length"
+  ></ngb-pagination>
 </div>
