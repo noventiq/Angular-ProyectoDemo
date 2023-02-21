@@ -76,7 +76,7 @@
         <div
           class="col-sm-12"
           *ngFor="
-            let image of formProduct.controls.images.controls;
+            let image of getImages();
             let i = index
           "
         >
@@ -84,6 +84,12 @@
             <input type="text" class="form-control" [formControlName]="i" />
           </div>
         </div>
+      </div>
+      <div>
+        <button type="button" class="btn btn-secondary float-end"
+        (click)="addImage()">
+          <i class="fa fa-plus"></i>
+        </button>
       </div>
     </div>
     <div class="mb-3 row">

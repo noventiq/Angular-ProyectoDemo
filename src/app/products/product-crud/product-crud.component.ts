@@ -90,4 +90,14 @@ export class ProductCrudComponent {
       }
     });
   }
+
+  getImages(): any[] {
+    return this.formProduct.controls.images.controls;
+  }
+
+  addImage() {
+    this.formProduct.controls.images.push(
+      new FormControl('', Validators.required)
+    );
+  }
 }
