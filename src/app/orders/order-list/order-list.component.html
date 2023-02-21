@@ -28,8 +28,8 @@
     <span>{{ item?.id }} - Tiene {{ item?.products.length }} agregados</span>
   </div>
   <ngb-pagination
-    [(page)]="pageNumber"
-    [pageSize]="pageSize"
+    [(page)]="CurrentPageNumber"
+    [pageSize]="itemPerPage"
     [collectionSize]="ordenesPaginationInfoLimitSkip.total"
   ></ngb-pagination>
 </div>

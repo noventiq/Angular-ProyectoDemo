@@ -27,8 +27,8 @@ export class OrderListComponent {
     limit: 0,
   };
 
-  pageSize: number = 5;
-  private _pageNumber: number = 1;
+  itemPerPage: number = 4;
+  private _currentPageNumber: number = 1;
 
   constructor(private _orderService: OrderService) {
     this.getOrderList();
@@ -51,20 +51,20 @@ export class OrderListComponent {
     });
   }
 
-  set pageNumber(value: number) {
-    this._pageNumber = value;
-    console.log('Change detected: ', this._pageNumber);
+  set CurrentPageNumber(value: number) {
+    this._currentPageNumber = value;
+    console.log('Change detected: ', this._currentPageNumber);
     this.getOrderListLimitAndSkip();
   }
 
-  get pageNumber(): number {
-    return this._pageNumber;
+  get CurrentPageNumber(): number {
+    return this._currentPageNumber;
   }
 
   getOrderListLimitAndSkip(): void {
-    const skip = (this._pageNumber - 1) * this.pageSize;
+    const skip = (this._currentPageNumber - 1) * this.itemPerPage;
     this.getOrderSub = this._orderService
-      .getCartListLimitAndSkip(this.pageSize, skip)
+      .getCartListLimitAndSkip(this.itemPerPage, skip)
       .subscribe({
         next: (response: any) => {
           console.log(response);
