@@ -9,7 +9,9 @@
         | paginate : page_size : page_number
     "
   >
-    <span>{{ item?.id }} - Tiene {{ item?.products.length }} agregados</span>
+    <span>{{ item?.id }} - Tiene {{ item?.products.length }} agregados
+      <span class="text-sm">{{ item?.dateCreated | datePeru }}</span>
+    </span>
   </div>
   <ngb-pagination
     [(page)]="page_number"

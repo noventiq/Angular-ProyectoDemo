@@ -17,7 +17,7 @@ export class OrderListComponent {
     limit: 0,
   };
 
-  page_size: number = 10;
+  page_size: number = 3;
   page_number: number = 1;
 
   ordenesPaginationInfoLimitSkip: PaginationOrder = {

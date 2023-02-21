@@ -15,12 +15,23 @@ export class OrderService {
   getCartList(): Observable<PaginationOrder> {
     return this.http
       .get(this.cartListUrl)
-      .pipe(map((response) => <PaginationOrder>response));
+      .pipe(map((response) => {
+        
+        for (let index = 0; index < response['carts'].length; index++) {
+          response['carts'][index]['dateCreated'] = new Date();
+        }
+        return <PaginationOrder>response;
+      }));
   }
 
   getCartListLimitAndSkip(limit: number, skip: number): Observable<PaginationOrder> {
     return this.http
       .get(`${this.cartListUrl}?limit=${limit}&skip=${skip}`)
-      .pipe(map((response) => <PaginationOrder>response));
+      .pipe(map((response) => {
+        for (let index = 0; index < response['carts'].length; index++) {
+          response['carts'][index]['dateCreated'] = new Date();
+        }
+        return <PaginationOrder>response;
+      }));
   }
 }
