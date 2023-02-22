@@ -16,6 +16,7 @@ import {
 import { PaginationProduct } from './models/paginationProduct';
 import { ProductService } from './services/productService';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product-list',
@@ -49,7 +50,8 @@ export class ProductListComponent
 
   constructor(
     private _productService: ProductService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private _title: Title
   ) {
     console.log('*01.constructor en productList.component');
     this.getProductList();
@@ -63,6 +65,7 @@ export class ProductListComponent
   }
 
   ngOnInit() {
+    this._title.setTitle("Listado de productos");
     console.log('*03.ngOnInit en productList.component');
   }
 

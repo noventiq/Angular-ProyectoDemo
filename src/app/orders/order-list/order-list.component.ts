@@ -1,5 +1,6 @@
+import { Title } from '@angular/platform-browser';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { OrderService } from './orderService/orderService';
 import { PaginationOrder } from './models/paginationOrder';
 
@@ -8,7 +9,7 @@ import { PaginationOrder } from './models/paginationOrder';
   templateUrl: './order-list.component.html',
   styleUrls: ['./order-list.component.scss'],
 })
-export class OrderListComponent {
+export class OrderListComponent implements OnInit {
   getOrderSub: Subscription;
   ordenesPaginationInfo: PaginationOrder = {
     carts: [],
@@ -30,9 +31,13 @@ export class OrderListComponent {
   pageSize: number = 5;
   private _pageNumber: number = 1;
 
-  constructor(private _orderService: OrderService) {
+  constructor(private _orderService: OrderService, private _title: Title) {
     this.getOrderList();
     this.getOrderListLimitAndSkip();
+  }
+  
+  ngOnInit(): void {
+    this._title.setTitle('Listado de ordenes');
   }
 
   getOrderList(): void {
