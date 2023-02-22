@@ -1,0 +1,23 @@
+<h2>Usuarios</h2>
+<p>Datos de usuarios {{ user?.firstName }}</p>
+
+<div class="card-body">
+  <table class="table table-sm">
+    <tbody>
+      <tr>
+        <td>Nombres</td>
+        <td>{{user?.firstName }} {{user?.lastName}} {{user?.maidenName}}</td>
+      </tr>
+      <tr>
+        <td>Edad</td>
+        <td>{{user?.age}}</td>
+      </tr>
+      <tr>
+        <td>Foto</td>
+        <td>
+            <img src="{{user?.image}}" alt="">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

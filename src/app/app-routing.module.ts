@@ -1,3 +1,7 @@
+import { AlertaSinGuardarGuard } from './guards/alerta-sin-guardar.guard';
+import { UserItemComponent } from './users/user-item/user-item.component';
+import { PermisosGuard } from './guards/permisos.guard';
+import { UsersListComponent } from './users/users-list/users-list.component';
 import { ProductComponent } from './products/product/product.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { BlackComponent } from './layouts/black/black.component';
@@ -39,6 +43,22 @@ const routes: Routes = [
       {
         path: '',
         component: OrderListComponent,
+      },
+    ],
+  },
+  {
+    path: 'users',
+    component: DefaultComponent,
+    canActivate: [PermisosGuard],
+    children: [
+      {
+        path: '',
+        component: UsersListComponent,
+        canDeactivate: [AlertaSinGuardarGuard],
+      },
+      {
+        path: ':id',
+        component: UserItemComponent,
       },
     ],
   },

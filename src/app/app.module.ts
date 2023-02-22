@@ -1,3 +1,4 @@
+import { UsersModule } from './users/users.module';
 import { OrdersModule } from './orders/orders.module';
 import { BlackComponent } from './layouts/black/black.component';
 import { DefaultComponent } from './layouts/default/default.component';
@@ -34,6 +35,7 @@ import {
     LayoutsModule, //**layouts.module.ts
     ProductsModule,
     OrdersModule,
+    UsersModule,
     FormsModule,
     NgbModule,
     FontAwesomeModule,
