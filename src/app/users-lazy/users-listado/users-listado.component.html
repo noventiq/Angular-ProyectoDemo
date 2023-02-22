@@ -1,0 +1,41 @@
+<h2>Usuarios</h2>
+<p>Listado de usuarios</p>
+
+<div class="card-body">
+    <!-- <div class="card-title">
+        <form [formGroup]="formSearch">
+            <input type="text" class="form-contro-sm" formControlName="usuario">
+        </form>
+    </div> -->
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Usuario</th>
+          <th scope="col">Email</th>
+          <th scope="col">Genero</th>
+          <th scope="col">Edad</th>
+          <th scope="col">Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of usersPaginationInfo.users; index as i ">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>
+            <img
+              src="{{ item.image }}"
+              class="me-2"
+              style="width: 20px"
+            />
+            {{ item.firstName }} {{ item.lastName }}
+          </td>
+          <td>{{ item.email }}</td>
+          <td>{{ item.gender }}</td>
+          <td>{{ item.age }}</td>
+          <td>
+            <!-- <a routerLink="/users/{{ item.id }}">Ver</a> -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

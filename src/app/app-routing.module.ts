@@ -62,6 +62,13 @@ const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'users-lazy',
+    loadChildren: () =>
+      import('./users-lazy/users-lazy-routing.module').then(
+        (m) => m.UsersLazyRoutingModule
+      ),
+  },
 ];
 
 @NgModule({
