@@ -1,3 +1,4 @@
+import { AlertaGuard } from './guards/alerta.guard';
 import { AlertaSinGuardarGuard } from './guards/alerta-sin-guardar.guard';
 import { UserItemComponent } from './users/user-item/user-item.component';
 import { PermisosGuard } from './guards/permisos.guard';
@@ -33,6 +34,7 @@ const routes: Routes = [
       {
         path: ':id',
         component: ProductComponent,
+        canActivate: [AlertaGuard],
       },
     ],
   },
