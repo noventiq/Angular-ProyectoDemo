@@ -17,7 +17,7 @@ export class UsersListadoComponent implements OnInit {
     skip: 0,
     limit: 0,
   };
-
+  indice: number = 0;
   page_size: number = 10;
   page_number: number = 1;
 

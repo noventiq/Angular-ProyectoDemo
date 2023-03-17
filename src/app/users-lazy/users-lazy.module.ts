@@ -16,9 +16,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     UsersLazyRoutingModule,
     NgbPaginationModule,
     ReactiveFormsModule,
+    
     BrowserModule,
     RouterModule,
     SharedModule,
+
   ],
 })
 export class UsersLazyModule {}

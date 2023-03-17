@@ -1,4 +1,3 @@
-import { UsersLazyModule } from './users-lazy/users-lazy.module';
 import { UsersModule } from './users/users.module';
 import { OrdersModule } from './orders/orders.module';
 import { BlackComponent } from './layouts/black/black.component';
@@ -34,7 +33,6 @@ import {
     AppRoutingModule,
     HttpClientModule,
     LayoutsModule, //**layouts.module.ts
-    // UsersLazyModule,
     ProductsModule,
     OrdersModule,
     UsersModule,

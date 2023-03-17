@@ -5,11 +5,10 @@ import { SharedModule } from './../shared/shared.module';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UsersListComponent } from './users-list/users-list.component';
 import { UserItemComponent } from './user-item/user-item.component';
 
 @NgModule({
-  declarations: [UsersListComponent, UserItemComponent],
+  declarations: [UserItemComponent],
   imports: [
     CommonModule,
     BrowserModule,
@@ -18,6 +17,6 @@ import { UserItemComponent } from './user-item/user-item.component';
     NgbPaginationModule,
     ReactiveFormsModule,
   ],
-  exports: [UsersListComponent],
+  exports: [],
 })
 export class UsersModule {}
