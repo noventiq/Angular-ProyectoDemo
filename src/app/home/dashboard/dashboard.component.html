@@ -1,3 +1,34 @@
+<h1>
+  Angular + WebSockets
+</h1>
+<br>
+<div class="row">
+  <div class="column">
+    <textarea [(ngModel)]="content" name="contentInput" cols="40" rows="2"></textarea>
+    <br>
+    <button (click)="sendMsg()" class="btn btn-success">Enviar mensaje</button>
+    &nbsp;
+    <button (click)="closeWS()" class="btn btn-danger">Cerrar conexión</button>
+  </div>
+
+</div>
+<br>
+<div>
+  <h1>Mensajes enviados:</h1>
+  <br>
+  <ul>
+    <li *ngFor="let item of sent">Source: {{item.source}} -> Content {{item.content}}</li>
+  </ul>
+</div>
+
+<br>
+<div>
+  <h1>Mensajes recibidos:</h1>
+  <br>
+  <ul>
+    <li *ngFor="let item of received">Source: {{item.source}} -> Content {{item.content}}</li>
+  </ul>
+</div>
 <!-- Page Heading -->
 <h1 class="h3 mb-2 text-gray-800">Charts</h1>
 <p class="mb-4">

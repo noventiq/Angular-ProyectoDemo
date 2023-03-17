@@ -4,12 +4,14 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { PaginationProduct } from './models/PaginationProduct';
 import { DashboardService } from './services/DashboardService';
+import { WebsocketService } from './services/websocketService';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  providers: [WebsocketService],
 })
 export class DashboardComponent implements OnInit {
   getProductSub: Subscription;
@@ -29,9 +31,21 @@ export class DashboardComponent implements OnInit {
     limit: 0,
   };
 
-  constructor(private _dashboarService: DashboardService) {
+  title = 'socketrv';
+  content = '';
+  received = [];
+  sent = [];
+
+  constructor(
+    private _dashboarService: DashboardService,
+    private WebsocketService: WebsocketService
+  ) {
     this.getProductList();
     this.getOrderList();
+    WebsocketService.messages.subscribe((msg) => {
+      this.received.unshift(msg);
+      console.log('Response from websocket: ' + msg);
+    });
   }
   ngOnInit(): void {
     console.log('Method not implemented.');
@@ -67,5 +81,21 @@ export class DashboardComponent implements OnInit {
         // Message.ocultarProcesando();
       },
     });
+  }
+
+  sendMsg() {
+    let message = {
+      source: '',
+      content: ''
+    };
+    message.source = 'localhost';
+    message.content = this.content;
+
+    this.sent.unshift(message);
+    this.WebsocketService.messages.next(message);
+  }
+
+  closeWS() {
+    this.WebsocketService.close();
   }
 }

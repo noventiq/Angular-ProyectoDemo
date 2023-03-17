@@ -15,10 +15,10 @@
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item">
-          <a class="nav-link" href="index.html">
-              <i class="fas fa-fw fa-tachometer-alt"></i>
-              <span>Dashboard</span></a>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/dashboard">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Dashboard</span></a>
       </li>
 
       <!-- Divider -->
@@ -142,7 +142,7 @@
 
           <!-- Begin Page Content -->
           <div class="container-fluid">
-            
+
             <router-outlet></router-outlet>
           </div>
           <!-- /.container-fluid -->

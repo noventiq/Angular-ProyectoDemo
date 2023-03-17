@@ -21,6 +21,7 @@ import {
   faBars as fasBars,
   faUser as fasUser,
 } from '@fortawesome/free-solid-svg-icons';
+import { HomeModule } from './home/home.module';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {
     LayoutsModule, //**layouts.module.ts
     ProductsModule,
     OrdersModule,
+    HomeModule,
     UsersModule,
     FormsModule,
     NgbModule,
