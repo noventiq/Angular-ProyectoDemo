@@ -4,7 +4,7 @@ import { AnonymousSubject } from 'rxjs/internal/Subject';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-const CHAT_URL = 'wss://localhost:7078/time';
+const CHAT_URL = 'wss://localhost:7078/dashboard';
 
 export interface Message {
   source: string;

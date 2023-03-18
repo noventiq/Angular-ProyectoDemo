@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { PaginationProduct } from './models/PaginationProduct';
 import { DashboardService } from './services/DashboardService';
 import { WebsocketService } from './services/websocketService';
+import Chart from 'chart.js/auto';
 
 @Component({
   selector: 'app-dashboard',
@@ -36,6 +37,40 @@ export class DashboardComponent implements OnInit {
   received = [];
   sent = [];
 
+  chartLineConfig: any = {
+    type: 'line', //this denotes tha type of chart
+    data: {
+      // values on X-Axis
+      labels: [
+        '2022-05-10',
+        '2022-05-11',
+        '2022-05-12',
+        '2022-05-13',
+        '2022-05-14',
+        '2022-05-15',
+        '2022-05-16',
+        '2022-05-17',
+      ],
+      datasets: [
+        {
+          label: 'Sales',
+          data: ['467', '576', '572', '79', '92', '574', '573', '576'],
+          backgroundColor: 'blue',
+        },
+        {
+          label: 'Profit',
+          data: ['542', '542', '536', '327', '17', '0.00', '538', '541'],
+          backgroundColor: 'limegreen',
+        },
+      ],
+    },
+    options: {
+      aspectRatio: 2.5,
+    },
+  };
+
+  public chart: any;
+
   constructor(
     private _dashboarService: DashboardService,
     private WebsocketService: WebsocketService
@@ -43,12 +78,15 @@ export class DashboardComponent implements OnInit {
     this.getProductList();
     this.getOrderList();
     WebsocketService.messages.subscribe((msg) => {
-      this.received.unshift(msg);
+      // this.received.shift();
+      this.chartLineConfig.labels.shift();
+      // this.
       console.log('Response from websocket: ' + msg);
     });
   }
   ngOnInit(): void {
     console.log('Method not implemented.');
+    this.createChart();
   }
 
   getProductList(): void {
@@ -86,7 +124,7 @@ export class DashboardComponent implements OnInit {
   sendMsg() {
     let message = {
       source: '',
-      content: ''
+      content: '',
     };
     message.source = 'localhost';
     message.content = this.content;
@@ -97,5 +135,9 @@ export class DashboardComponent implements OnInit {
 
   closeWS() {
     this.WebsocketService.close();
+  }
+
+  createChart() {
+    this.chart = new Chart('MyChart', this.chartLineConfig);
   }
 }
