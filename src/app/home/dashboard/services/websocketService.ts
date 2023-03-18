@@ -60,6 +60,6 @@ export class WebsocketService {
   }
 
   public close() {
-    this._ws.close(1000, 'user diconnect');
+    this._ws.close(3000, 'user diconnect');
   }
 }

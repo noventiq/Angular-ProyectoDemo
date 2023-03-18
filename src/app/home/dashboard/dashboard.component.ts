@@ -88,7 +88,7 @@ export class DashboardComponent implements OnInit {
       source: '',
       content: ''
     };
-    message.source = 'localhost';
+    message.source = window.location.href;
     message.content = this.content;
 
     this.sent.unshift(message);
