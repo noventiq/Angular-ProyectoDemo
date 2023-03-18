@@ -42,24 +42,24 @@ export class DashboardComponent implements OnInit {
     data: {
       // values on X-Axis
       labels: [
-        '2022-05-10',
-        '2022-05-11',
-        '2022-05-12',
-        '2022-05-13',
-        '2022-05-14',
-        '2022-05-15',
-        '2022-05-16',
-        '2022-05-17',
+        // '2022-05-10',
+        // '2022-05-11',
+        // '2022-05-12',
+        // '2022-05-13',
+        // '2022-05-14',
+        // '2022-05-15',
+        // '2022-05-16',
+        // '2022-05-17',
       ],
       datasets: [
         {
           label: 'Sales',
-          data: ['467', '576', '572', '79', '92', '574', '573', '576'],
+          data: [], //['467', '576', '572', '79', '92', '574', '573', '576'],
           backgroundColor: 'blue',
         },
         {
           label: 'Profit',
-          data: ['542', '542', '536', '327', '17', '0.00', '538', '541'],
+          data: [], //['542', '542', '536', '327', '17', '0.00', '538', '541'],
           backgroundColor: 'limegreen',
         },
       ],
@@ -77,11 +77,19 @@ export class DashboardComponent implements OnInit {
   ) {
     this.getProductList();
     this.getOrderList();
-    WebsocketService.messages.subscribe((msg) => {
+    WebsocketService.messages.subscribe((msg: any) => {
       // this.received.shift();
-      this.chartLineConfig.labels.shift();
-      // this.
+      if (this.chartLineConfig.data.labels.length > 8) {
+        this.chartLineConfig.data.labels.shift();
+        this.chartLineConfig.data.datasets[0].data.shift();
+        this.chartLineConfig.data.datasets[1].data.shift();
+      }
+      this.chartLineConfig.data.labels.push(msg.Label);
+      this.chartLineConfig.data.datasets[0].data.push(msg.Sale);
+      this.chartLineConfig.data.datasets[1].data.push(msg.Profit);
       console.log('Response from websocket: ' + msg);
+      this.chart.update();
+      // this.createChart();
     });
   }
   ngOnInit(): void {
@@ -138,6 +146,7 @@ export class DashboardComponent implements OnInit {
   }
 
   createChart() {
-    this.chart = new Chart('MyChart', this.chartLineConfig);
+    const control = document.getElementById('MyChart') as HTMLCanvasElement;
+    this.chart = new Chart(control, this.chartLineConfig);
   }
 }
