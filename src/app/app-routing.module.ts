@@ -9,6 +9,7 @@ import { OrderListComponent } from './orders/order-list/order-list.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DefaultComponent } from './layouts/default/default.component';
+import { MsalGuard } from '@azure/msal-angular';
 
 const routes: Routes = [
   {
@@ -28,6 +29,7 @@ const routes: Routes = [
       {
         path: '',
         component: ProductListComponent,
+        canActivate: [MsalGuard]
       },
       {
         path: ':id',

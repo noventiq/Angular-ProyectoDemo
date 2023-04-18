@@ -6,6 +6,7 @@ import { PaginationProduct } from './models/PaginationProduct';
 import { DashboardService } from './services/DashboardService';
 import { WebsocketService } from './services/websocketService';
 import Chart from 'chart.js/auto';
+import { MsalService } from '@azure/msal-angular';
 
 @Component({
   selector: 'app-dashboard',
@@ -36,6 +37,9 @@ export class DashboardComponent implements OnInit {
   content = '';
   received = [];
   sent = [];
+
+  isIframe = false;
+  loginDisplay = false;
 
   chartLineConfig: any = {
     type: 'line', //this denotes tha type of chart
@@ -73,7 +77,8 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private _dashboarService: DashboardService,
-    private WebsocketService: WebsocketService
+    private WebsocketService: WebsocketService,
+    private authService: MsalService
   ) {
     this.getProductList();
     this.getOrderList();
@@ -93,6 +98,7 @@ export class DashboardComponent implements OnInit {
     });
   }
   ngOnInit(): void {
+    this.isIframe = window !== window.parent && !window.opener;
     console.log('Method not implemented.');
     this.createChart();
   }
@@ -148,5 +154,20 @@ export class DashboardComponent implements OnInit {
   createChart() {
     const control = document.getElementById('MyChart') as HTMLCanvasElement;
     this.chart = new Chart(control, this.chartLineConfig);
+  }
+
+  login() {
+    this.authService.loginPopup()
+      .subscribe({
+        next: (result) => {
+          console.log(result);
+          this.setLoginDisplay();
+        },
+        error: (error) => console.log(error)
+      });
+  }
+
+  setLoginDisplay() {
+    this.loginDisplay = this.authService.instance.getAllAccounts().length > 0;
   }
 }
